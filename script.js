@@ -30,7 +30,8 @@ function getBatmanData () {
      console.log(movies);
      movies.forEach(movie => {
 
-         let movieTitle = document.createElement('p');
+         let movieTitle = document.createElement('a');
+         
          movieTitle.innerHTML = movie.Title;
          movieTitle.id = `${movie.imdbID}`;
          batList.appendChild(movieTitle);
@@ -45,10 +46,11 @@ function getBatmanData () {
 
 }
 
-moviesList.addEventListener("click", (e) => {
+batList.addEventListener("click", (e) => {
    
+    if (e.target.id != "") {
     fetch(`http://www.omdbapi.com/?i=${e.target.id}&apikey=${key}`)
     .then(response => response.json())
-    .then(printMovieTitles);
-    
-});
+    .then(data => console.log(data))
+    }
+})
